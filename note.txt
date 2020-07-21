@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo update-rc.d test defaults 95
+sudo update-rc.d -f test remove
