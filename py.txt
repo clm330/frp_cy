@@ -2,21 +2,20 @@
 #coding:utf-8
  
 import os
-import psutil
 import time
 
 
 info = 1
 
-def judgeprocess(processname):
-    pl = psutil.pids()
-    for pid in pl:
-        if psutil.Process(pid).name() == processname:
-            print(pid)
+def isRunning(process_name):
+    try:
+        process = len(os.popen('ps aux | grep "' + process_name + '" | grep -v grep').readlines())
+        if process >= 1:
             return True
-            break
-    else:
-        print("not found")
+        else:
+            return False
+    except:
+        print("Check process ERROR!!!")
         return False
 
 
@@ -35,6 +34,6 @@ while 1 :
 
 
 
-    if judgeprocess("frpc") == False and info == 0:
-        os.system("frpc -c frpc.ini")
+    if isRunning("frpc") == False and info == 0:
+        os.system("/home/robot/frp/frp_0.33.0_linux_amd64/frpc -c /home/robot/frp/frp_0.33.0_linux_amd64/me.ini")
 
